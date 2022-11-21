@@ -22,11 +22,11 @@
     },
     "GITHUB_CLIENT_ID": {
       "description": "[Optional] Github app ID. <a href='https://github.com/settings/developers'>Create an app here</a> with the param 'Authorization callback URL' set to the URL of your new Silex instance on heroku + '/github/oauth_callback'. E.g. 'https://app-name.herokuapp.com/github/oauth_callback'",
-      "required": false
+      "required": true
     },
     "GITHUB_CLIENT_SECRET": {
       "description": "[Optional] Github app secret. <a href='https://github.com/settings/developers'>Create an app here</a> with the param 'Authorization callback URL' set to the URL of your new Silex instance on heroku + '/github/oauth_callback'. E.g. 'https://app-name.herokuapp.com/github/oauth_callback'",
-      "required": false
+      "required": true
     },
     "ENABLE_FTP": {
       "description": "[Optional] Set this value to 'true' if you want your users to be able to use FTP to open/save/publish. Leave blank to disable.",
