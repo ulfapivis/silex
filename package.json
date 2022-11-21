@@ -1,0 +1,193 @@
+{
+  "name": "silex-website-builder",
+  "description": "Free and easy website builder for everyone.",
+  "version": "2.7.63",
+  "version:frontend": "2.12",
+  "version:backwardcompat": "2.2.14",
+  "author": {
+    "name": "Alex Hoyau",
+    "url": "https://lexoyo.me/"
+  },
+  "contributors": [
+    {
+      "name": "Jean-Baptiste Richardet",
+      "url": "https://github.com/JbIPS"
+    },
+    {
+      "name": "Tariq Benezza",
+      "url": "https://github.com/tariqbenezza"
+    }
+  ],
+  "main": "dist/server/server/index.js",
+  "bin": {
+    "silex": "./dist/server/server/silex_web.js"
+  },
+  "license": "(GPL-3.0 OR MPL-2.0)",
+  "engines": {
+    "node": ">=10.15.3 <=16.13.2"
+  },
+  "watch": {
+    "build:css:debug": {
+      "patterns": [
+        "src/css/"
+      ],
+      "extensions": "less"
+    },
+    "build:html:debug": {
+      "patterns": [
+        "src/html/"
+      ],
+      "extensions": "pug"
+    },
+    "build:prodotype": {
+      "patterns": [
+        "src/prodotype/"
+      ],
+      "extensions": "*"
+    },
+    "build:client:debug": {
+      "patterns": [
+        "src/ts/client/"
+      ],
+      "extensions": "ts"
+    },
+    "build:server:debug": {
+      "patterns": [
+        "src/ts/server/"
+      ],
+      "extensions": "ts"
+    }
+  },
+  "scripts": {
+    "release": "",
+    "watch": "npm-watch",
+    "start": "node dist/server/server/silex_web.js",
+    "start:debug": "cross-env SILEX_DEBUG=true nodemon dist/server/server/silex_web.js",
+    "prepublishOnly": "npm run lint:fix ; npm run build",
+    "build": "run-s cleanup build:css:release build:html build:prodotype build:client:release build:server:release build:monaco-editor",
+    "cleanup": "mkdirp tmp ; mv dist/public tmp/ ; rm -rf dist ; mv tmp dist",
+    "webpack": "webpack --config webpack.config.js",
+    "build:folders": "mkdirp dist/prodotype/components dist/prodotype/styles",
+    "build:components": "prodotype src/prodotype/components dist/prodotype/components/",
+    "build:styles": "prodotype src/prodotype/styles dist/prodotype/styles/",
+    "build:prodotype": "run-s build:folders build:components build:styles",
+    "lint:prodotype": "ejslint src/prodotype/**/*.ejs",
+    "build:css:release": "lessc src/css/_styles.less dist/html/css/admin.css",
+    "build:css:debug": "lessc src/css/_styles.less dist/html/css/admin.css --source-map",
+    "build:html": "pug src/html/index.pug --out dist/html/ --no-debug",
+    "build:html:debug": "rm dist/html/index.html ; pug src/html/debug.pug --out dist/html/",
+    "build:client:release": "webpack --config webpack.config.js",
+    "build:client:debug": "webpack --config webpack.config.js",
+    "build:server:release": "tsc -p tsconfig-server-release.json",
+    "build:server:debug": "tsc -p tsconfig-server-debug.json",
+    "build:monaco-editor": "webpack --config webpack-monaco-editor.config.js",
+    "lint": "tslint -c tslint.json 'src/ts/**/*.ts'",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.9",
+    "beautify": "^0.0.8",
+    "body-parser": "1.20.0",
+    "cloud-explorer": "^2.1.15",
+    "compression": "1.7.4",
+    "cookie-parser": "1.4.6",
+    "cookie-session": "2.0.0",
+    "cross-env": "7.0.3",
+    "css-loader": "6.7.1",
+    "detect-browser": "5.3.0",
+    "drag-drop-stage-component": "1.0.35",
+    "express": "4.18.1",
+    "express-force-ssl": "0.3.2",
+    "file-loader": "6.2.0",
+    "font-awesome": "4.7.0",
+    "js-beautify": "1.14.5",
+    "jsdom": "20.0.0",
+    "less": "4.1.3",
+    "lit-html": "^2.3.1",
+    "mkdirp": "^1.0.4",
+    "monaco-editor": "0.34.0",
+    "monaco-editor-webpack-plugin": "7.0.1",
+    "node_modules-path": "*",
+    "normalize.css": "8.0.1",
+    "npm-run-all": "^4.1.5",
+    "object-path": "0.11.8",
+    "prodotype": "^1.0.28",
+    "promise-sequential": "1.1.1",
+    "pug-cli": "1.0.0-alpha6",
+    "redux": "4.2.0",
+    "redux-undo": "1.0.1",
+    "request": "2.88.2",
+    "responsize": "0.0.7",
+    "serve-static": "1.15.0",
+    "silex-blank-templates": "^1.6.8",
+    "silex-templates": "^1.0.12",
+    "simplebar": "^5.3.8",
+    "sortablejs": "1.15.0",
+    "source-map-support": "0.5.21",
+    "style-loader": "3.3.1",
+    "tags-input": "1.1.1",
+    "ts-loader": "9.3.1",
+    "typescript": "4.7.4",
+    "uuid": "^8.3.2",
+    "webpack": "5.74.0",
+    "webpack-cli": "4.10.0",
+    "wysihtml": "0.6.0-beta1"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.13",
+    "@types/express-session": "1.17.5",
+    "@types/jest": "28.1.7",
+    "@types/jsdom": "20.0.0",
+    "@types/node": "18.7.6",
+    "babel-jest": "28.1.3",
+    "ejs-lint": "^1.2.2",
+    "eslint": "8.22.0",
+    "jest": "26.0.1",
+    "nodemon": "2.0.19",
+    "npm-watch": "0.11.0",
+    "ts-jest": "^26.0.0",
+    "tslint": "6.1.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silexlabs/Silex.git"
+  },
+  "keywords": [
+    "page builder",
+    "cloud",
+    "SaaS",
+    "template builder",
+    "web page editor",
+    "html5 editor",
+    "free",
+    "open source",
+    "online editor",
+    "silex website",
+    "free",
+    "website builder",
+    "online",
+    "silex website builder",
+    "silex.me",
+    "silex",
+    "html editor",
+    "free website builder",
+    "silex cms",
+    "online website builder open source",
+    "Create a free website",
+    "Wix.com open source alternative",
+    "designer",
+    "webdesigner",
+    "web master",
+    "webmaster",
+    "open source CMS",
+    "CSS3",
+    "HTML5",
+    "Javascript",
+    "WYSIWYG",
+    "github",
+    "silex",
+    "jekyll"
+  ]
+}

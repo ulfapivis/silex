@@ -1,0 +1,21 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "outDir": "dist/client/",
+    "target": "ES2019",
+    "watch": true,
+    "sourceMap": true,
+    "module": "esnext",
+    "removeComments": false,
+    "typeRoots": [
+      "src/ts/types",
+      "node_modules/@types"
+    ],
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/ts/client/App.ts",
+    "node_modules/redux-undo/typings.d.ts"
+  ]
+}
